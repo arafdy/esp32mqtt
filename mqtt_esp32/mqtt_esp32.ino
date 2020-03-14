@@ -4,10 +4,10 @@
 // Connection info.
 const char* ssid = "TheHunter";
 const char* password =  "Ramon2121";
-const char* mqttServer = "broker.hivemq.com";
-const int mqttPort = 1883;
+const char* mqttServer = "test.mosquitto.org";
+const int mqttPort = 8081;
 const char* clientID = "rafdyamestira";
-const char* channelName = "rafdytester";
+const char* channelName = "rafdytester/1";
 long lastMsg = 0;
 char msg[50];
 int value = 0;
@@ -56,9 +56,9 @@ void loop() {
   if (now - lastMsg > 1) {
     lastMsg = now;
     ++value;
-    snprintf (msg, 50, "hello world #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    client.publish(channelName, msg);
+//    snprintf (msg, 50, "hello world #%ld", value);
+//    Serial.print("Publish message: ");
+    Serial.println(String(value).c_str());
+    client.publish(channelName,String(value).c_str());
   }
 }
